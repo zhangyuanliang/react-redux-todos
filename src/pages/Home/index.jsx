@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import store from '../../redux/store.js'
 
 import { Input, Button, List, message } from 'antd';
-import './index.less'
+import './index.scss'
 
 export default class Home extends Component {
   constructor(props) {
