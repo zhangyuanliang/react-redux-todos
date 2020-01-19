@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {
+  actions
+} from '../../redux/modules/home.js'
 
 import { Input, Button, List } from 'antd';
 import './index.scss'
@@ -50,23 +53,15 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     inputChange(e) {
-      const action = {
-        type: 'changeInput',
-        value: e.target.value
-      }
+      const action = actions.changeInputAction(e.target.value)
       dispatch(action)
     },
     addItem() {
-      const action = {
-        type: 'addItem'
-      }
+      const action = actions.addItemAction()
       dispatch(action)
     },
     deleteItem(index) {
-      const action = {
-        type: 'deleteItem',
-        index
-      }
+      const action = actions.deleteItemAction(index)
       dispatch(action)
     }
   }

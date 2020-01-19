@@ -1,5 +1,12 @@
 import { message } from 'antd';
 
+// ActionTypes
+export const types = {
+  CHANGE_INPUT: 'HOME/CHANGE_INPUT',
+  ADD_ITEM: 'HOME/ADD_ITEM',
+  DELETE_ITEM: 'HOME/DELETE_ITEM'
+}
+
 // State
 const initState = {
   inputValue: '',
@@ -8,14 +15,31 @@ const initState = {
   ]
 }
 
+// Action
+export const actions = {
+  changeInputAction: value => {
+      return {
+        type: types.CHANGE_INPUT,
+        value
+      }
+  },
+  addItemAction: () => ({
+    type: types.ADD_ITEM
+  }),
+  deleteItemAction: index => ({
+    type: types.DELETE_ITEM,
+    index
+  })
+}
+
 // reducer
 const homeReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'changeInput':
+    case types.CHANGE_INPUT:
       return Object.assign({}, state, {
         inputValue: action.value
       })
-    case 'addItem':
+    case types.ADD_ITEM:
       if (state.inputValue.trim() === '') {
         message.warning('请输入')
         return state
@@ -27,7 +51,7 @@ const homeReducer = (state = initState, action) => {
           state.inputValue
         ]
       })
-    case 'deleteItem':
+    case types.DELETE_ITEM:
       return Object.assign({}, state, {
         inputValue: '',
         items: state.items.filter((item, index) => {
