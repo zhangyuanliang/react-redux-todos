@@ -4,24 +4,29 @@ import { message } from 'antd';
 export const types = {
   CHANGE_INPUT: 'HOME/CHANGE_INPUT',
   ADD_ITEM: 'HOME/ADD_ITEM',
-  DELETE_ITEM: 'HOME/DELETE_ITEM'
+  DELETE_ITEM: 'HOME/DELETE_ITEM',
+  SET_TODOS: 'SET_TODOS',
 }
 
 // State
 const initState = {
   inputValue: '',
-  items: [
-    '111', '2222'
-  ]
+  items: []
 }
 
 // Action
 export const actions = {
+  setTodosAction: (todos) => {
+    return {
+      type: types.SET_TODOS,
+      todos
+    }
+  },
   changeInputAction: value => {
-      return {
-        type: types.CHANGE_INPUT,
-        value
-      }
+    return {
+      type: types.CHANGE_INPUT,
+      value
+    }
   },
   addItemAction: () => ({
     type: types.ADD_ITEM
@@ -35,6 +40,10 @@ export const actions = {
 // reducer
 const homeReducer = (state = initState, action) => {
   switch (action.type) {
+    case types.SET_TODOS:
+      return Object.assign({}, state, {
+        items: action.todos
+      })
     case types.CHANGE_INPUT:
       return Object.assign({}, state, {
         inputValue: action.value
