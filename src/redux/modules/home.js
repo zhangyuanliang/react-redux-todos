@@ -1,3 +1,4 @@
+import { message } from 'antd';
 
 // State
 const initState = {
@@ -15,6 +16,10 @@ const homeReducer = (state = initState, action) => {
         inputValue: action.value
       })
     case 'addItem':
+      if (state.inputValue.trim() === '') {
+        message.warning('请输入')
+        return state
+      }
       return Object.assign({}, state, {
         inputValue: '',
         items: [

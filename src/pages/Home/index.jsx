@@ -1,72 +1,77 @@
 import React, { Component } from 'react'
-import store from '../../redux/store.js'
+import { connect } from 'react-redux'
 
-import { Input, Button, List, message } from 'antd';
+import { Input, Button, List } from 'antd';
 import './index.scss'
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = store.getState().homeReducer
-    this.inputChange = this.inputChange.bind(this)
-    this.addItem = this.addItem.bind(this)
-  }
+class Home extends Component {
 
   componentDidMount() {
-    store.subscribe(() => {
-      this.setState({
-        ...store.getState().homeReducer
-      })
-    })
-  }
-  inputChange(e) {
-    const action = {
-      type: 'changeInput',
-      value: e.target.value
-    }
-    store.dispatch(action)
-  }
-
-  addItem() {
-    if (!this.state.inputValue) {
-      message.warning('请输入')
-      return
-    }
-    const action = {
-      type: 'addItem'
-    }
-    store.dispatch(action)
-  }
-
-  deleteItem(index) {
-    const action = {
-      type: 'deleteItem',
-      index
-    }
-    store.dispatch(action)
+    
   }
 
   render() {
-    const { inputValue, items } = this.state
+    const {
+      inputValue,
+      items,
+      inputChange,
+      addItem,
+      deleteItem
+    } = this.props
     return ( 
       <div style={{padding: 20}}>
         <div>
           <Input
             value={inputValue}
-            onChange={this.inputChange} 
-            placeholder="请输入" 
+            onChange={inputChange}
+            placeholder="请输入"
             style={{ width: '20%', marginRight: 10 }}
           ></Input>
-          <Button onClick={this.addItem}>新增</Button>
+          <Button onClick={addItem}>新增</Button>
         </div>
         <List
           size="small"
           bordered
           dataSource={items}
-          renderItem={(item, index) => <List.Item actions={[<span onClick={() => this.deleteItem(index)} className="link">删除</span>]}>{item}</List.Item>}
+          renderItem={(item, index) => <List.Item actions={[<span onClick={() => deleteItem(index)} className="link">删除</span>]}>{item}</List.Item>}
           style={{width: '20%', marginTop: 4}}
         />
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    inputValue: state.homeReducer.inputValue,
+    items: state.homeReducer.items
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    inputChange(e) {
+      const action = {
+        type: 'changeInput',
+        value: e.target.value
+      }
+      dispatch(action)
+    },
+    addItem() {
+      const action = {
+        type: 'addItem'
+      }
+      dispatch(action)
+    },
+    deleteItem(index) {
+      const action = {
+        type: 'deleteItem',
+        index
+      }
+      dispatch(action)
+    }
+  }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
+export default Home
