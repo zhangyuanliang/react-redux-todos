@@ -14,9 +14,10 @@ You will also see any lint errors in the console.
 
 ### 项目介绍
 项目三个分支：
-* v1.0为`redux`实现
+* v1.0为 `redux`实现
 * v2.0为 `redux` + `react-redux`
 * v3.0为 `redux` + `react-redux` + `axios`
-* v4.0为 `redux` + `react-redux` + `redux-thunk`  + `axios`
-其中master为最新稳定版本，即v3.0
+* v4.0为 `redux` + `react-redux` + `redux-thunk` + `axios`
+
+其中master为最新稳定版本，即v4.0
 
