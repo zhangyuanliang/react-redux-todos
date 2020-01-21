@@ -21,3 +21,5 @@ You will also see any lint errors in the console.
 
 其中master为最新稳定版本，即v4.0
 
+因为 axios 调用的是 easy-mock，不太稳定，后期会改成 Mockjs
+
