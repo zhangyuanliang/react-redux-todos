@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { getTodos } from '../../services/home.js'
 
 // ActionTypes
 export const types = {
@@ -16,7 +17,15 @@ const initState = {
 
 // Action
 export const actions = {
-  setTodosAction: (todos) => {
+  setTodosAction: () => {
+    return (dispatch, getState) => {
+      getTodos().then(res => {
+        const action = actions.todosAction(res.data)
+        dispatch(action)
+      })
+    }
+  },
+  todosAction: (todos) => {
     return {
       type: types.SET_TODOS,
       todos
