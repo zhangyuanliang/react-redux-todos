@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {
   actions
 } from '../../redux/modules/home.js'
-import { getTodos } from '../../services/home.js'
 
 import { Input, Button, List } from 'antd';
 import './index.scss'
@@ -54,10 +53,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     setTodos() {
-      getTodos().then(res => {
-        const action = actions.setTodosAction(res.data)
-        dispatch(action)
-      })
+      dispatch(actions.setTodosAction())
     },
     inputChange(e) {
       const action = actions.changeInputAction(e.target.value)
