@@ -17,5 +17,6 @@ You will also see any lint errors in the console.
 * v1.0为`redux`实现
 * v2.0为 `redux` + `react-redux`
 * v3.0为 `redux` + `react-redux` + `axios`
+* v4.0为 `redux` + `react-redux` + `redux-thunk`  + `axios`
 其中master为最新稳定版本，即v3.0
 
